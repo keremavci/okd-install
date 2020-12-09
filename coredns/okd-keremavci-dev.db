@@ -1,0 +1,8 @@
+okd.keremavci.dev.  IN  SOA dns.okd.keremavci.dev. mail.okd.keremavci.dev. 2020120612 7200 3600 1209600 3600
+
+dns.okd.keremavci.dev.  IN  A   10.6.71.9
+registry.okd.keremavci.dev.  IN  A   10.6.71.9
+api.okd.keremavci.dev. IN A 10.6.71.20
+*.apps.okd.keremavci.dev. IN A 10.6.71.21
+
+

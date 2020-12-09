@@ -1,0 +1,31 @@
+version: "3.8"
+   
+services:
+  dhcp:
+    image: networkboot/dhcpd
+    command: ens192
+    restart: always
+    network_mode: host
+    volumes:
+      - ${PWD}/dhcp/:/data 
+
+  coredns:
+    image: coredns/coredns:1.8.0
+    command: -conf /opt/coredns/Corefile
+    restart: always
+    network_mode: host
+    volumes:
+      - ${PWD}/coredns/:/opt/coredns
+
+  registry:
+    image: registry:2
+    restart: always
+    network_mode: host
+    environment:
+      REGISTRY_HTTP_ADDR: 0.0.0.0:443
+      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/registry.crt 
+      REGISTRY_HTTP_TLS_KEY: /certs/registry.key
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /data
+    volumes:
+      - ${PWD}/registry/certs:/certs
+      - ${PWD}/registry/data:/data

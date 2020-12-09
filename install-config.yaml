@@ -1,0 +1,56 @@
+apiVersion: v1
+baseDomain: keremavci.dev
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform: {}
+  replicas: 2
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: {}
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: okd
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  vsphere:
+    apiVIP: 10.6.71.20
+    cluster: okd-test-cluster
+    datacenter: okd-test-dc
+    defaultDatastore: datastore1
+    ingressVIP: 10.6.71.21
+    network: VM Network
+    password: VSpherePASSWORD
+    username: administrator@vsphere.local
+    vCenter: 145.40.64.187
+publish: External
+pullSecret: '{"auths":{"fake":{"auth": "bar"}}}'
+sshKey: |
+  ssh-rsa PRIVATE_KEY avci.kerem@gmail.com
+additionalTrustBundle: |
+  ----BEGIN CERTIFICATE-----
+  TEST
+  TEST
+  TEST
+  -----END CERTIFICATE-----
+imageContentSources:
+- mirrors:
+  - registry.okd.keremavci.dev/openshift/okd
+  source: quay.io/openshift/okd
+- mirrors:
+  - registry.okd.keremavci.dev/openshift/okd
+  source: quay.io/openshift/okd-content
+
+
