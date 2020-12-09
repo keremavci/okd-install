@@ -1,4 +1,4 @@
-Herkese merhaba, bu yazıda Vmware Vsphere ortamına OKD 4.5 kurulumundan bahsedeceğim.
+Herkese merhaba, bu yazıda VMware vSphere ortamına OKD 4.5 kurulumundan bahsedeceğim.
 
 Kurulum senaryomuzda OKD clusterının internete çıkış izni olmadığı için air-gapped bir kurulum gerçekleştireceğiz.
 
@@ -24,7 +24,7 @@ Ortamımızda OKD kurulumuna başlamadan önce bir Docker Image Registry, DHCP v
 
 Senaryomuzda hızlıca sonuca ulaşmak için DNS, DHCP ve Registry kurulumlarımız container içinde hizmet verecek. Bu containerları dhcp-dns-registry.yml dosyası ile ayağa kaldırıyorum..
 
->Registry için Sertifika oluşturumam gerekiyor. Bunun için aşağıdaki linteki dökümanı takip ederek kök sertifikalarımı daha sonrasında da registry için kullacağım sertifikları oluşturuyorum. 
+>Registry için Sertifika oluşturmam gerekiyor. Bunun için aşağıdaki linteki dökümanı takip ederek kök sertifikalarımı daha sonrasında da registry için kullacağım sertifikları oluşturuyorum. 
 https://gist.github.com/fntlnz/cf14feb5a46b2eda428e000157447309
 
 
@@ -46,7 +46,7 @@ oc adm release extract --tools quay.io/openshift/okd:4.5.0-0.okd-2020-10-15-2354
 
 
 ## vCenter Sertifikalarının Sunucuya Eklenmesi
-Kuruluma başlamada önce vCenter Root sertifikalarının kurulumu başlatacağımız sunucuya eklenmesi gerekiyor. Ben bunun için aşağıdaki komutları kullanıyorum.
+Kuruluma başlamadan önce vCenter Root sertifikalarının kurulumu başlatacağımız sunucuya eklenmesi gerekiyor. Ben bunun için aşağıdaki komutları kullanıyorum.
 
 ```
 export VCENTER_URL=https://145.40.64.187
@@ -102,14 +102,14 @@ imageContentSources:
 ```
 openshift-install create install-config --dir okd-install-config
 ```
-komutu ile install-config.yaml dosyasını interaktif bir şekilde oluşturuabilirsiniz. İlerleyen süreçte başka clusterlara ihtiyacınız oludğunda aynı dosyayı değiştirerek kullanabilirsiniz.
+komutu ile install-config.yaml dosyasını interaktif bir şekilde oluşturuabilirsiniz. İlerleyen süreçte başka clusterlara ihtiyacınız oluduğunda aynı dosyayı değiştirerek kullanabilirsiniz.
 Ben okd-install-config içerisinde oluşturduğum install-config.yaml dosyasına biraz önce oc adm release mirror komutu ile oluşan çıktıyı ve additionalTrustBundle altınada registry sertifikalarında kullandığım root sertifikasınıda ekliyorum.Oluşan install-config.yaml dosyasının içeriğine bu dökümanın git reposunda ulaşabilirsiniz.
 
 
 ![Alt text](docs/images/okd-install-config.jpg?raw=true "create-config")
 
 >Burada dikkat edilmesi gereken, Pull Secret alanına local registryninzde authentication kullanmasanızda buraya, 
-`{"auths":{"fake":{"auth": "bar"}}}` gibi sahte bir değer yazmanız.
+`{"auths":{"fake":{"auth": "bar"}}}` gibi sahte bir değer yazmanız gerekiyor.
 
 >Sizin kurulumunda ek olarak proxy gibi yada oluşturulacak vmlerin sayısı gibi özelleştirmeye ihtiyaç var ise https://docs.okd.io/latest/installing/installing_vsphere/installing-vsphere-installer-provisioned-network-customizations.html linkinden yararlanabilirsiniz.
 
@@ -125,7 +125,7 @@ komutu ile kurulumu başlatıyorum.
 ![Alt text](docs/images/okd-install-command.jpg?raw=true "create-cluster")
 
 
->Kurulum ilk önce Fedora CoreOS imajını indirip VCenter'a ekleyerek ile başlıyor. Devamında bu senaryoda 3 master ve 1 bootstrap node ayağa kaldırıyor. Bu sunucu masterlar için ignition configleri serve ediyor ve gerekli diğer kurulumları gerçekleştiriyor.
+>Kurulum ilk önce Fedora CoreOS imajını indirip VCenter'a ekleyerek ile başlıyor. Devamında bu senaryoda 3 master ve 1 bootstrap node ayağa kaldırıyor. Bu bootstrap sunucusu masterlar için ignition configleri serve ediyor ve gerekli diğer kurulumları gerçekleştiriyor.
 Kurulum sırasında bir sorun olup olmadığını izlemek için, install-config oluşturuken yaratılan private key ile bootstrap sunucusuna bağlanıp journalctl ile kurulumunu kontrol edebilirsiniz.
 
 ## Son Kontroller ve Dashboard
@@ -138,7 +138,7 @@ oc get clusteroperators
 oc get clusterinfo
 oc get nodes
 ```
-komutları ile clusterınızın durumunu görüp, bu senaryoda okd-cluster/auth altında bulunan kubeadmin-password dosyasında yazan kubeadmin ile dashboarda bağlanabilirsiniz.
+komutları ile clusterınızın durumunu görüp, bu senaryoda okd-cluster/auth altında bulunan kubeadmin-password dosyasında yazan kubeadmin ile dashboarda giriş yapabilirsiniz..
 
 ![Alt text](docs/images/oc-cluster-info.jpg?raw=true "oc-cluster-info")
 
