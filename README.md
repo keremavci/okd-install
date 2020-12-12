@@ -144,6 +144,4 @@ komutları ile clusterınızın durumunu görüp, bu senaryoda okd-cluster/auth 
 
 ![Alt text](docs/images/okd-dashboard.jpg?raw=true "okd-dashboard")
 
-![Alt text](docs/images/vcenter-kurulum-sonrasi.jpg?raw=true "vCenter Kurulum Sonrası")
-
 
