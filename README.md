@@ -9,7 +9,7 @@ Redhat, CoreOS firmasını satın almasından sonra Openshift platformunda çok 
 Kurulum senaryomuz https://www.equinix.com adresinden aldığımız bir bare metal sunucu üzerinde Vsphere 6.7 kurulu olan sunucuda gerçekleşecek. Ben burada aldığım sunucuya öncesinde vCenter kurulumunu gerçekleştirdim. vCenter kurulumu için https://computingforgeeks.com/install-vcenter-server-appliance-on-esxi-host/ adresindeki yönergeleri takip ettim.
 
 
-Devamında ise işlerimi aynı networkden daha rahat halletmek için bir tane ubuntu  jumpbox sunucusu ayağa kaldırdım. Bu adımda da ufak bir trick vCenter isoları daha hızlı download etmek için https://metal.equinix.com/developers/docs/guides/vmware-esxi/ adresindede tavsiye gibi vSphere ssh ile direk girip gerekli isoları wget ile çekebiliyoruz.
+Devamında ise işlerimi aynı networkden daha rahat halletmek için bir tane ubuntu jumpbox sunucusu ayağa kaldırdım. Bu adımda da ufak bir trick, vCenter isoları daha hızlı download etmek için https://metal.equinix.com/developers/docs/guides/vmware-esxi/ adresinde de tavsiye ettiği gibi vSphere ssh ile direk girip gerekli isoları wget ile çekebiliyoruz.
 
 https://metal.equinix.com/developers/docs/guides/vmware-esxi/
 
