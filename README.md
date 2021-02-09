@@ -53,7 +53,7 @@ export VCENTER_URL=https://145.40.64.187
 curl -vkLO $VCENTER_URL/certs/download.zip
 unzip download.zip
 cd certs/lin
-for i in `ls;do mv $i $i.crt;done
+for i in `ls`;do mv $i $i.crt;done
 cd -
 sudo cp -R lin/ /usr/local/share/ca-certificates/
 sudo chmod 0644 -R /usr/local/share/ca-certificates/lin/
